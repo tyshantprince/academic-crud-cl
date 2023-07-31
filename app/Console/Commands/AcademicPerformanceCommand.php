@@ -139,8 +139,6 @@ GROUP BY student_group, subject;
 
     ');
 
-    var_dump($results);
-
         // Display the results
         $this->info('Results:');
         $headers = ['Group Name', 'Subject', 'Average Assessment', '70th Percentile'];

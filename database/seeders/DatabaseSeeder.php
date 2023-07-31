@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        print('running');
         AcademicPerformance::factory()->count(300)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
