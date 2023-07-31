@@ -129,16 +129,13 @@ class AcademicPerformanceCommand extends Command
     {
         $results = DB::select('
         SELECT 
-        student_group, 
-        subject,
-        AVG(assessment_score) as average,
-        MAX(assessment_score) AS score_above_70
-        FROM (
-        SELECT student_group, subject, assessment_score,
-            PERCENT_RANK() OVER (PARTITION BY student_group, subject ORDER BY assessment_score) AS percentile FROM academic_performances
-) AS subquery
-WHERE percentile >= 0.7
+    student_group,
+    subject,
+    AVG(assessment_score) AS average_assessment,
+    PERCENTILE_CONT(0.7) WITHIN GROUP (ORDER BY assessment_score) AS score_at_70_percent
+FROM academic_performances
 GROUP BY student_group, subject;
+
 
     ');
 
@@ -152,8 +149,8 @@ GROUP BY student_group, subject;
             $data[] = [
                 $result->student_group,
                 $result->subject,
-                $result->average,
-                $result->score_above_70,
+                $result->average_assessment,
+                $result->score_at_70_percent,
             ];
         }
         $this->table($headers, $data);
