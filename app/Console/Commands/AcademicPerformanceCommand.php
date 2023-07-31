@@ -35,7 +35,7 @@ class AcademicPerformanceCommand extends Command
         // Add your CRUD operations here using the StudentPerformance model
 
         // Insert test data
-        $this->insertTestData();
+        // $this->insertTestData();
 
         // Run the MySQL query
         $this->runQuery();
